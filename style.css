@@ -1,0 +1,63 @@
+*{
+    margin:0;
+    padding:0
+}
+.login {
+    margin:100px auto;
+    width:200px;
+    height:300px;
+    border:1px solid lightgrey;
+    border-radius: 10px;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}  
+#login-input {
+    margin:0 0  20px 0
+}
+#password-input {
+    margin:0 0  20px 0
+}
+#butt1 {
+    width:80px;
+    height:20px;
+    margin:20px 0 20px 0
+}
+
+
+.registration {
+    position:absolute;
+    visibility: hidden;
+    margin:100px auto;
+    width:200px;
+    height:300px;
+    border:1px solid lightgrey;
+    border-radius: 10px;
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}  
+#login-input {
+    margin:0 0  20px 0
+}
+#password-input {
+    margin:0 0  20px 0
+}
+#butt1 {
+    width:80px;
+    height:20px;
+    margin:20px 0 20px 0
+}
+#login-input-reg {
+    margin:0 0  20px 0
+}
+#password-input-reg {
+    margin:0 0  20px 0
+}
+#butt2 {
+    width:80px;
+    height:20px;
+    margin:20px 0 20px 0
+}
