@@ -1,6 +1,7 @@
 *{
     margin:0;
-    padding:0
+    padding:0;
+    font-family: 'Roboto', sans-serif;
 }
 .login {
     margin:100px auto;
@@ -19,7 +20,7 @@
 #password-input {
     margin:0 0  20px 0
 }
-#butt1 {
+#buttLog {
     width:80px;
     height:20px;
     margin:20px 0 20px 0
@@ -45,7 +46,7 @@
 #password-input {
     margin:0 0  20px 0
 }
-#butt1 {
+#buttLog {
     width:80px;
     height:20px;
     margin:20px 0 20px 0
@@ -56,8 +57,15 @@
 #password-input-reg {
     margin:0 0  20px 0
 }
-#butt2 {
+#buttReg {
     width:80px;
     height:20px;
     margin:20px 0 20px 0
+}
+.menu {
+    display:none;
+    justify-content: space-around;
+}
+.menu>div {
+    padding:10px
 }
