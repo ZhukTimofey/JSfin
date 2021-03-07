@@ -1,4 +1,5 @@
 'use strict'
+
 const users = [
     {
         email: "timofey695@gmail.com",
@@ -11,6 +12,10 @@ const users = [
     {
         email: "abc@gma",
         password: 'zxc'
+    },
+    {
+        email: "1@",
+        password: '1'
     }
 ]
 const inputEmail = document.getElementById('login-input')
@@ -69,8 +74,13 @@ buttLog.onclick = function () {
     let password = document.getElementById('password-input').value
     let validLogin = 0;
     let validPass = 0;
+    let form = 0;
     for (let i = 0; i < users.length; i++) {
-        if (users[i].email !== login) {
+        if (login.indexOf('@') == -1) {
+            alert('Неверная форма логина')
+            form += 1
+            break
+        } else if (users[i].email !== login) {
             continue
         }
         if (users[i].password !== password) {
@@ -81,33 +91,40 @@ buttLog.onclick = function () {
             alert('добро пожаловать')
             validLogin += 1
             const main = document.getElementsByClassName('menu')
+            const main1 = document.getElementsByClassName('main')
             main[0].style.display = "flex"
+            main1[0].style.display = "flex"
             let log = document.getElementsByClassName('login')
             log[0].style.display = 'none'
+            m.style.color = 'black'
+            c.style.color = 'white'
+            mp.style.color = 'white'
+            q.style.color = 'white'
             break
         }
 
     }
-    if (validPass !== 0) {
-    } else if (validLogin == 0) {
-        alert('неверный логин')
+    if (form == 0) {
+        if (validPass !== 0) {
+        } else if (validLogin == 0) {
+            alert('неверный логин')
+        }
     }
 }
 function registration() {
     let log = document.getElementsByClassName('login')
     let reg = document.getElementsByClassName('registration')
-    log[0].style.visibility = 'hidden'
-    log[0].style.position = 'absolute'
-    reg[0].style.visibility = 'visible'
-    reg[0].style.position = 'static'
+    reg[0].style.display = 'flex'
+    log[0].style.display = 'none'
+
+
 }
 let k = function login() {
     let log = document.getElementsByClassName('login')
     let reg = document.getElementsByClassName('registration')
-    reg[0].style.visibility = 'hidden'
-    reg[0].style.position = 'absolute'
-    log[0].style.visibility = 'visible'
-    log[0].style.position = 'static'
+    reg[0].style.display = 'none'
+    log[0].style.display = 'flex'
+
 }
 buttReg.onclick = function () {
     let login = document.getElementById('login-input-reg').value
@@ -118,9 +135,13 @@ buttReg.onclick = function () {
     console.log(cp)
     let validLogin = 0
     for (let i = 0; i < users.length; i++) {
+        if (login.indexOf('@') == -1) {
+            alert('Неверная форма логина')
+            validLogin += 1
+            break
+        }
         if (users[i].email == login) {
             validLogin += 1
-            console.log('kek')
             alert('Существующий логин')
             break
         }
@@ -131,15 +152,298 @@ buttReg.onclick = function () {
                 email: login,
                 password: passw
             })
-            console.log(users)
+            alert('Вы зарегестрированы')
+            const main = document.getElementsByClassName('menu')
+            const main1 = document.getElementsByClassName('main')
+            main[0].style.display = "flex"
+            main1[0].style.display = "flex"
+            let reg = document.getElementsByClassName('registration')
+            reg[0].style.display = 'none'
+            m.style.color = 'black'
+            c.style.color = 'white'
+            mp.style.color = 'white'
+            q.style.color = 'white'
+        } else {
+            alert('Пароли не совпадают')
         }
+
+
     }
 }
 
 function back() {
-    const main = document.getElementsByClassName('menu')
-    main[0].style.display = "none"
+    const mune = document.getElementsByClassName('menu')
+    mune[0].style.display = "none"
     let log = document.getElementsByClassName('login')
     log[0].style.display = 'flex'
+    const contacts = document.getElementsByClassName('contacts')
+    const main = document.getElementsByClassName('main')
+    main[0].style.display = 'none'
+    contacts[0].style.display = 'none'
+    map.style.display = 'none'
 }
 
+
+const MyMap = document.getElementById('map')
+const contacts = document.getElementsByClassName('contacts')
+const main = document.getElementsByClassName('main')
+let head = document.createElement('h1')
+let mainTxt = document.createElement('p')
+head.innerHTML = "Добро пожаловать"
+if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+    mainTxt = "Вы используете мобильное устройство"
+} else {
+    mainTxt = "Вы используете компьютер"
+}
+
+main[0].append(head)
+main[0].append(mainTxt)
+main[0].style.display = 'none'
+let m = document.getElementById('nav-main')
+let c = document.getElementById('nav-cont')
+let mp = document.getElementById('nav-map')
+let q = document.getElementById('nav-logout')
+function mainSection() {
+
+    m.style.color = 'black'
+    c.style.color = 'white'
+    mp.style.color = 'white'
+    q.style.color = 'white'
+    main[0].style.display = 'flex'
+    contacts[0].style.display = 'none'
+    MyMap.style.display = 'none'
+}
+
+
+
+
+const cont = document.getElementsByClassName('contacts-table')
+let n = 0;
+async function getData() {
+    n += 1
+    main[0].style.display = 'none'
+    contacts[0].style.display = 'block'
+    cont[0].style.display = 'block'
+    MyMap.style.display = 'none'
+
+    m.style.color = 'white'
+    c.style.color = 'black'
+    mp.style.color = 'white'
+    q.style.color = 'white'
+    if (n == 1) {
+        console.log(n)
+        contacts[0].style.display = 'block'
+        main[0].style.display = 'none'
+        const result = await fetch('https://gist.githubusercontent.com/oDASCo/3f4014d24dc79e1e29b58bfa96afaa1b/raw/677516ee3bd278f7e3d805108596ca431d00b629/db.json ')
+        const data = await result.json();
+        let info = document.createElement('div');
+        info.setAttribute('class', 'info');
+        let numOfMen = 0;
+        let numOfWomen = 0;
+
+        let max = 0;
+        let cur = 0;
+        let NumberOfMax = 0;
+        for (let i = 0; i < data.length; i++) {
+            if (data[i].gender == 'female') {
+                numOfWomen += 1
+            } else if (data[i].gender == 'male') {
+                numOfMen += 1
+            }
+            cur = data[i].balance
+            cur = cur.replace(/,/g, '')
+            cur = cur.replace('$', '');
+            cur = Number(cur)
+            if (cur > max) {
+                max = cur;
+                NumberOfMax = i;
+            }
+        }
+
+
+        let mof = document.createElement('div');
+        let now = document.createElement('div');
+        let bl = document.createElement('div');
+        mof.innerHTML = `Number of men:${numOfMen} `
+        now.innerHTML = `Number of woman:${numOfWomen} `
+        bl.innerHTML = `Max balance:${data[NumberOfMax].balance} `
+        info.append(mof)
+        info.append(now)
+        info.append(bl)
+        contacts[0].prepend(info)
+        let table = document.createElement('table')
+
+        let tr1 = document.createElement('tr')
+        const name = document.createElement('td')
+        name.innerHTML = `Name`
+        const company = document.createElement('td')
+        company.innerHTML = `Company`
+        const email = document.createElement('td')
+        email.innerHTML = `Email`
+        const phone = document.createElement('td')
+        phone.innerHTML = `Phone`
+        const balance = document.createElement('td')
+        balance.innerHTML = `Balance`
+        const registered = document.createElement('td')
+        registered.innerHTML = `Registered`
+        const buttonTable = document.createElement('td')
+        buttonTable.innerHTML = `Button`
+        tr1.append(name)
+        tr1.append(company)
+        tr1.append(email)
+        tr1.append(phone)
+        tr1.append(balance)
+        tr1.append(registered)
+        tr1.append(buttonTable);
+        table.append(tr1)
+        tr1.style.border = '1px solid #000'
+        name.style.border = '1px solid #000'
+        company.style.border = '1px solid #000'
+        email.style.border = '1px solid #000'
+        phone.style.border = '1px solid #000'
+        balance.style.border = '1px solid #000'
+        registered.style.border = '1px solid #000'
+        buttonTable.style.border = '1px solid #000'
+
+
+        for (let i = 0; i < data.length; i++) {
+
+
+            let tr = document.createElement('tr')
+            table.append(tr);
+            let td1 = document.createElement('td')
+            td1.innerHTML = `${data[i].name}`
+            tr.append(td1)
+            let td2 = document.createElement('td')
+            td2.innerHTML = `${data[i].company}`
+            tr.append(td2)
+            let td3 = document.createElement('td')
+            td3.innerHTML = `${data[i].email}`
+            tr.append(td3)
+            let td4 = document.createElement('td')
+            td4.innerHTML = `${data[i].phone}`
+            tr.append(td4)
+            let td5 = document.createElement('td')
+            td5.innerHTML = `${data[i].balance}`
+            tr.append(td5)
+            let td6 = document.createElement('td')
+            td6.innerHTML = `${data[i].registered}`
+            tr.append(td6)
+            let button = document.createElement('button')
+            button.innerHTML = "Delete"
+            button.onclick = function () {
+                let del = confirm('Вы уверены что хотите удалить елемент?');
+                console.log(del)
+                if (del == true) {
+                    tr.remove()
+                }
+
+            }
+            tr.append(button)
+
+            if (data[i].isActive == false) {
+                tr.style.backgroundColor = 'lightgrey'
+            }
+            tr.style.border = '1px solid #000'
+            td1.style.border = '1px solid #000'
+            td2.style.border = '1px solid #000'
+            td3.style.border = '1px solid #000'
+            td4.style.border = '1px solid #000'
+            td5.style.border = '1px solid #000'
+            td6.style.border = '1px solid #000'
+        }
+
+        cont[0].append(table)
+        const buttonRefreshe = document.createElement('button')
+        buttonRefreshe.innerHTML = 'Refreshe'
+
+        buttonRefreshe.onclick = function () {
+            {
+                table.remove()
+                info.remove()
+                buttonRefreshe.remove()
+                n = 0
+                getData()
+            }
+
+        }
+        contacts[0].append(buttonRefreshe)
+        table.setAttribute('class', 'table')
+    }
+
+}
+
+
+
+function initMap() {
+    let opt = {
+        center: { lat: 53.89464680138015, lng: 27.547075431871885 },
+        zoom: 13
+    }
+    let Map = new google.maps.Map(MyMap, opt)
+    let markerBSU = new google.maps.Marker({
+        position: { lat: 53.89464680138015, lng: 27.547075431871885 },
+        map: Map,
+    });
+    let infoBSU = new google.maps.InfoWindow({
+        content: '<h3>БГУ</h3>'
+    });
+    markerBSU.addListener('click', function () {
+        infoBSU.open(Map, markerBSU);
+    })
+    let markerDrj = new google.maps.Marker({
+        position: { lat: 53.889000, lng: 27.546938 },
+        map: Map,
+    });
+    let infoDrj = new google.maps.InfoWindow({
+        content: '<h3>ДС Дружная</h3>'
+    });
+    markerDrj.addListener('click', function () {
+        infoDrj.open(Map, markerDrj);
+    })
+
+    let markerKSIS = new google.maps.Marker({
+        position: { lat: 53.912151, lng: 27.594580 },
+        map: Map,
+    });
+    let infoKSIS = new google.maps.InfoWindow({
+        content: '<h3>КСИС</h3>'
+    });
+    markerKSIS.addListener('click', function () {
+        infoKSIS.open(Map, markerKSIS);
+    })
+
+    let markerBSUIR = new google.maps.Marker({
+        position: { lat: 53.918097, lng: 27.594501 },
+        map: Map,
+    });
+    let infoBSUIR = new google.maps.InfoWindow({
+        content: '<h3>БГУИР</h3>'
+    });
+    markerBSUIR.addListener('click', function () {
+        infoBSUIR.open(Map, markerBSUIR);
+    })
+
+    let markerBNTU = new google.maps.Marker({
+        position: { lat: 53.920345, lng: 27.592389 },
+        map: Map,
+    });
+    let infoBNTU = new google.maps.InfoWindow({
+        content: '<h3>БНТУ</h3>'
+    });
+    markerBNTU.addListener('click', function () {
+        infoBNTU.open(Map, markerBNTU);
+    })
+}
+
+function getMap() {
+    m.style.color = 'white'
+    c.style.color = 'white'
+    mp.style.color = 'black'
+    q.style.color = 'white'
+    main[0].style.display = 'none'
+    contacts[0].style.display = 'none'
+    MyMap.style.display = 'block'
+    console.log(MyMap)
+
+}

@@ -31,15 +31,27 @@
         <a onclick="k()">login</a>
     </div>
     <div class="menu">
-        <div>главная</div>
-        <div>контакты</div>
-        <div>карты</div>
-        <div onclick="back()">выйти</div>
+        <div id='nav-main' onclick="mainSection()">главная</div>
+        <div id='nav-cont' onclick="getData()">контакты</div>
+
+        <div id='nav-map' onclick="getMap()">карты</div>
+        <div id='nav-logout' onclick="back()">выйти</div>
+
     </div>
+    <div class="main">
+
+    </div>
+    <div class='contacts'>
+        <div class='contacts-table'></div>
+    </div>
+    <div id="map"></div>
 
 
 
     <script src="script.js"></script>
+    <script async
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBEeHWzZszp6jARceUQLK23lQ9fDz9ro2s&callback=initMap">
+        </script>
 </body>
 
 </html>
